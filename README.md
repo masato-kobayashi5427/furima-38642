@@ -26,30 +26,40 @@
 | explain            | text       | null: false                    |
 | price              | integer    | null: false                    |
 | category_id        | integer    | null: false                    |
+| prefecture_id      | integer    | null: false                    |
+| state_id           | integer    | null: false                    |
+| fee_id             | integer    | null: false                    |
+| delivery_time_id   | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
 - has_one :purchase
+- belongs_to :category
+- belongs_to :prefecture
+- belongs_to :state
+- belongs_to :fee
+- belongs_to :delivery_time
 
-## delivery_address テーブル
+## delivery_addresses テーブル
 
 | Column             | Type        | Options                        |
 | ------------------ | ----------- | ------------------------------ |
 | zip_code           | string      | null: false                    |
-| prefecture         | string      | null: false                    |
+| prefecture_id      | integer     | null: false                    |
 | city               | string      | null: false                    |
 | region             | string      | null: false                    |
-| building           | string      | null: false                    |
-| telephone          | integer     | null: false                    |
+| building           | string      |                                |
+| telephone          | string      | null: false                    |
 | purchase           | references  | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :purchase
+- belongs_to :prefecture
 
-## purchase テーブル
+## purchases テーブル
 
 | Column            | Type       | Options                        |
 | ----------------- | ---------- | ------------------------------ |
