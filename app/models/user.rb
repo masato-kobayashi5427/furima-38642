@@ -10,7 +10,7 @@ class User < ApplicationRecord
   validates :birth_day, presence: true
   validates :last_name_kana, presence: true
   validates :first_name_kana, presence: true
-  NAME_ZENKAKU = /\A[ぁ-んァ-ン一-龥]/.freeze
+  NAME_ZENKAKU = /\A[ぁ-んァ-ヶ一-龥々ー]+\z/.freeze
   validates_format_of :last_name, with: NAME_ZENKAKU, message: 'は全角で入力して下さい。'
   validates_format_of :first_name, with: NAME_ZENKAKU, message: 'は全角で入力して下さい。'
   NAME_KATAKANA = /\A[ァ-ヶー－]+\z/.freeze
