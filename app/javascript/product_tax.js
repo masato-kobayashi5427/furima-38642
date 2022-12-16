@@ -3,11 +3,11 @@ function product_tax (){
   productPrice.addEventListener("keyup", () => {
     const commission = productPrice.value * 0.1;
     const addTaxPrice = document.getElementById("add-tax-price");
-    const commissionInt = Math.trunc(commission);
+    const commissionInt = Math.floor(commission);
     addTaxPrice.innerHTML = `${commissionInt}`;
     const salesProfit = productPrice.value - commission ;
     const profit = document.getElementById("profit");
-    const salesProfitInt = Math.trunc(salesProfit);
+    const salesProfitInt = Math.floor(salesProfit);
     profit.innerHTML = `${salesProfitInt}`;
   });
 }

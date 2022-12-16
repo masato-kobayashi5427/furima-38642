@@ -32,12 +32,12 @@ RSpec.describe Product, type: :model do
         expect(@product.errors.full_messages).to include("Price can't be blank")
       end
       it 'category_idが---では出品できない' do
-        @product.category_id = ''
+        @product.category_id = '1'
         @product.valid?
         expect(@product.errors.full_messages).to include("Category can't be blank")
       end
       it 'prefecture_idが---では出品できない' do
-        @product.prefecture_id = ''
+        @product.prefecture_id = '1'
         @product.valid?
         expect(@product.errors.full_messages).to include("Prefecture can't be blank")
       end
