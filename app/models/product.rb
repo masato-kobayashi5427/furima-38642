@@ -13,7 +13,6 @@ class Product < ApplicationRecord
   validates :state_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :fee_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :delivery_time_id, numericality: { other_than: 1 , message: "can't be blank"}
-  validates :user, presence: true
 
   has_one_attached :image
   belongs_to :user
