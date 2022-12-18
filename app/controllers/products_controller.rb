@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_user!, only: :new
+  before_action :authenticate_user!, only: [:new, :edit]
   before_action :move_to_index, except: [:index, :show]
   
   def index
@@ -44,8 +44,7 @@ class ProductsController < ApplicationController
 
   def move_to_index
     @product = Product.find(params[:id])
-    if user_signed_in? && current_user.id == @product.user_id
-    else
+    unless current_user.id == @product.user_id
       redirect_to action: :index
     end
   end
