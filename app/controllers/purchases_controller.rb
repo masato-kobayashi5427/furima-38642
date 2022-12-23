@@ -1,9 +1,9 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!, expect: :index
+  before_action :set_product, only: [:index, :create]
   
   def index
     @purchase_delivery_address = PurchaseDeliveryAddress.new
-    @product = Product.find(params[:product_id])
     if @product.purchase.blank? && current_user.id != @product.user_id
     else
       redirect_to root_path
@@ -12,7 +12,6 @@ class PurchasesController < ApplicationController
 
   def create
     @purchase_delivery_address = PurchaseDeliveryAddress.new(purchase_params)
-    @product = Product.find(params[:product_id])
     if @purchase_delivery_address.valid?
       pay_item
       @purchase_delivery_address.save
@@ -35,5 +34,9 @@ class PurchasesController < ApplicationController
       card: purchase_params[:token],    # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
+  end
+
+  def set_product
+    @product = Product.find(params[:product_id])
   end
 end
