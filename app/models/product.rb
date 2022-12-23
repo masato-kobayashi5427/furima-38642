@@ -21,4 +21,5 @@ class Product < ApplicationRecord
   belongs_to :state
   belongs_to :fee
   belongs_to :delivery_time
+  has_one :purchase
 end
