@@ -6,7 +6,9 @@ class PurchaseDeliveryAddress
     validates :zipcode, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid"}
     validates :prefecture_id, numericality: { other_than: 1 , message: "can't be blank"}
     validates :user_id, :product_id, :city, :region, :token
-    validates :telephone, format: {with: /\A0\d{10,11}\z/, message: "is invalid. only half size number" }
+    validates :telephone, numericality: true
+    validates :telephone, format: { with: /\A[0-9]+\z/, message: "is invalid. only half size number" }
+    validates :telephone, length: { minimum: 10, maximum: 11 }
   end
 
   def save

@@ -70,14 +70,24 @@ RSpec.describe PurchaseDeliveryAddress, type: :model do
         expect(@purchase_delivery_address.errors.full_messages).to include("Telephone can't be blank")
       end
       it 'telephoneが全角では購入ができない' do
-        @purchase_delivery_address.telephone = '０００ー００００'
+        @purchase_delivery_address.telephone = '００００００００００'
         @purchase_delivery_address.valid?
         expect(@purchase_delivery_address.errors.full_messages).to include("Telephone is invalid. only half size number")
+      end
+      it 'telephoneが数字でなければ購入ができない' do
+        @purchase_delivery_address.telephone = 'aaaaaaaaaa'
+        @purchase_delivery_address.valid?
+        expect(@purchase_delivery_address.errors.full_messages).to include("Telephone is not a number", "Telephone is invalid. only half size number")
       end
       it 'telephoneが9桁以下では購入ができない' do
         @purchase_delivery_address.telephone = '000000000'
         @purchase_delivery_address.valid?
-        expect(@purchase_delivery_address.errors.full_messages).to include("Telephone is invalid. only half size number")
+        expect(@purchase_delivery_address.errors.full_messages).to include("Telephone is too short (minimum is 10 characters)")
+      end
+      it 'telephoneが12桁以上では購入ができない' do
+        @purchase_delivery_address.telephone = '000000000000'
+        @purchase_delivery_address.valid?
+        expect(@purchase_delivery_address.errors.full_messages).to include("Telephone is too long (maximum is 11 characters)")
       end
     end
   end
