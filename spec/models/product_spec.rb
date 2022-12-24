@@ -17,7 +17,7 @@ RSpec.describe Product, type: :model do
         expect(@product.errors.full_messages).to include("Name can't be blank")
       end
       it 'imageが空では出品できない' do
-        @product.image =  nil
+        @product.image = nil
         @product.valid?
         expect(@product.errors.full_messages).to include("Image can't be blank")
       end
