@@ -62,10 +62,11 @@ group :development do
 end
 
 group :production do
-  gem 'unicorn', '5.4.1'
   gem 'pg'
 end
-
+group :production do
+  gem 'unicorn', '5.4.1'
+end
 gem 'devise'
 gem 'active_hash'
 gem 'mini_magick'
