@@ -1,5 +1,5 @@
 #サーバ上でのアプリケーションコードが設置されているディレクトリを変数に入れておく
-app_path = File.expand_path('../../../', __FILE__)
+app_path = File.expand_path('../../../', __FILE__)  # 「../」が一つ増えている
 
 #アプリケーションサーバの性能を決定する
 worker_processes 1
@@ -17,7 +17,7 @@ listen "#{app_path}/shared/tmp/sockets/unicorn.sock"  # 「shared」の中を参
 stderr_path "#{app_path}/shared/log/unicorn.stderr.log"  # 「shared」の中を参照するよう変更
 
 #通常のログを記録するファイルを指定
-stdout_path "#{app_path}/shared/log/unicorn.stdout.log"  # 「shared」の中を参照するよう変更
+stdout_path "#{app_path}/shared/log/unicorn.stdout.log"
 
 #Railsアプリケーションの応答を待つ上限時間を設定
 timeout 60
