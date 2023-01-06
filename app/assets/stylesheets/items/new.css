@@ -11,6 +11,12 @@
   min-width: 500px;
 }
 
+img {
+  height: 200px;
+  width: 200px;
+  object-fit: contain;
+}
+
 .items-sell-header {
   padding: 5vh 0;
   text-align: center;

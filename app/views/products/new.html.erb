@@ -14,11 +14,12 @@
         商品画像
         <span class="indispensable">必須</span>
       </div>
+      <div id="previews"></div>
       <div class="click-upload">
         <p>
           クリックしてファイルをアップロード
         </p>
-        <%= f.file_field :image, id:"item-image" %>
+        <%= f.file_field :image, name: 'product[image]', data: {index: 0}, id:"item-image" %>
       </div>
     </div>
     <%# /商品画像 %>
@@ -135,7 +136,7 @@
     <%# /注意書き %>
     <%# 下部ボタン %>
     <div class="sell-btn-contents">
-      <%= f.submit "出品する" ,class:"sell-btn" %>
+      <%= f.submit "出品する" ,class:"sell-btn", id:"sell-btn" %>
       <%= link_to 'もどる', root_path, class:"back-btn" %>
     </div>
     <%# /下部ボタン %>
