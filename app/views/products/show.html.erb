@@ -7,7 +7,11 @@
       <%= @product.name %>
     </h2>
     <div class="item-img-content">
-      <%= image_tag @product.image ,class:"item-box-img" %>
+    <% if @product.images.attached? %>
+      <% @product.images.each do |image| %>
+        <%= image_tag image.variant(resize: '500x500'),class:"item-box-img" %>
+      <% end %>
+    <% end %>
       <% if @product.purchase.present? %>
       <div class="sold-out">
         <span>Sold Out!!</span>
