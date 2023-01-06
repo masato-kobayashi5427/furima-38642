@@ -12,9 +12,29 @@
 }
 
 img {
+  height: 100px;
+  width: 100px;
+  object-fit: contain;
+}
+
+.other-images {
+  display: flex;
+}
+
+.other-image {
+  margin-right: 10px;
+}
+
+.image-delete-button {
+  text-align: center;
+  border: solid 1px;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.main-image {
   height: 200px;
   width: 200px;
-  object-fit: contain;
 }
 
 .items-sell-header {
