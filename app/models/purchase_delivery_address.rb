@@ -3,10 +3,10 @@ class PurchaseDeliveryAddress
   attr_accessor :user_id, :product_id, :zipcode, :prefecture_id, :city, :region, :building, :telephone, :token
 
   with_options presence: true do
-    validates :zipcode, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid"}
-    validates :prefecture_id, numericality: { other_than: 1 , message: "can't be blank"}
+    validates :zipcode, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "は半角英数字で入力してください"}
+    validates :prefecture_id, numericality: { other_than: 1 , message: "を入力してください"}
     validates :user_id, :product_id, :city, :region, :token
-    validates :telephone, numericality: true, format: { with: /\A[0-9]+\z/, message: "is invalid. only half size number" }, length: { minimum: 10, maximum: 11 }
+    validates :telephone, numericality: true, format: { with: /\A[0-9]+\z/, message: "は半角英数字で入力してください" }, length: { minimum: 10, maximum: 11 }
   end
 
   def save
