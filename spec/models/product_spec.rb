@@ -17,9 +17,9 @@ RSpec.describe Product, type: :model do
         expect(@product.errors.full_messages).to include("Name can't be blank")
       end
       it 'imageが空では出品できない' do
-        @product.image = nil
+        @product.images.clear
         @product.valid?
-        expect(@product.errors.full_messages).to include("Image can't be blank")
+        expect(@product.errors.full_messages).to include("Images can't be blank", "Images は1枚以上5枚以下にしてください")
       end
       it 'explainが空では出品できない' do
         @product.explain = ''
@@ -34,27 +34,27 @@ RSpec.describe Product, type: :model do
       it 'category_idが---では出品できない' do
         @product.category_id = '1'
         @product.valid?
-        expect(@product.errors.full_messages).to include("Category can't be blank")
+        expect(@product.errors.full_messages).to include("Category を入力してください")
       end
       it 'prefecture_idが---では出品できない' do
         @product.prefecture_id = '1'
         @product.valid?
-        expect(@product.errors.full_messages).to include("Prefecture can't be blank")
+        expect(@product.errors.full_messages).to include("Prefecture を入力してください")
       end
       it 'state_idが---では出品できない' do
         @product.state_id = '1'
         @product.valid?
-        expect(@product.errors.full_messages).to include("State can't be blank")
+        expect(@product.errors.full_messages).to include("State を入力してください")
       end
       it 'fee_idが---では出品できない' do
         @product.fee_id = '1'
         @product.valid?
-        expect(@product.errors.full_messages).to include("Fee can't be blank")
+        expect(@product.errors.full_messages).to include("Fee を入力してください")
       end
       it 'delivery_time_idが---では出品できない' do
         @product.delivery_time_id = '1'
         @product.valid?
-        expect(@product.errors.full_messages).to include("Delivery time can't be blank")
+        expect(@product.errors.full_messages).to include("Delivery time を入力してください")
       end
       it 'priceが299以下だと出品できない' do
         @product.price = '299'
