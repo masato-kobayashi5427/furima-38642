@@ -26,6 +26,7 @@ class ProductsController < ApplicationController
   def edit
     product_attributes = @product.attributes
     @product_form = ProductForm.new(product_attributes)
+    @product_form.tag_name = @product.tags.first&.tag_name
     if @product.purchase.present? || current_user.id != @product_form.user_id
       redirect_to root_path
     else
@@ -52,7 +53,7 @@ class ProductsController < ApplicationController
   private
 
   def product_form_params
-    params.require(:product_form).permit(:name, :explain, :price, :category_id, :prefecture_id, :state_id, :fee_id, :delivery_time_id, {images: []}).merge(user_id: current_user.id)
+    params.require(:product_form).permit(:name, :explain, :price, :category_id, :prefecture_id, :state_id, :fee_id, :delivery_time_id, :tag_name, {images: []}).merge(user_id: current_user.id)
   end
 
   def set_product

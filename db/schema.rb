@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_21_020950) do
+ActiveRecord::Schema.define(version: 2023_01_08_081346) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -46,6 +46,15 @@ ActiveRecord::Schema.define(version: 2022_12_21_020950) do
     t.index ["purchase_id"], name: "index_delivery_addresses_on_purchase_id"
   end
 
+  create_table "product_tag_relations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "product_id"
+    t.bigint "tag_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_product_tag_relations_on_product_id"
+    t.index ["tag_id"], name: "index_product_tag_relations_on_tag_id"
+  end
+
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.text "explain", null: false
@@ -70,6 +79,12 @@ ActiveRecord::Schema.define(version: 2022_12_21_020950) do
     t.index ["user_id"], name: "index_purchases_on_user_id"
   end
 
+  create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "tag_name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "nickname", null: false
     t.string "email", null: false
@@ -90,6 +105,8 @@ ActiveRecord::Schema.define(version: 2022_12_21_020950) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "delivery_addresses", "purchases"
+  add_foreign_key "product_tag_relations", "products"
+  add_foreign_key "product_tag_relations", "tags"
   add_foreign_key "products", "users"
   add_foreign_key "purchases", "users"
 end
