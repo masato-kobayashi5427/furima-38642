@@ -39,10 +39,10 @@ const buildNewFileField = () => {
   // 2枚目用のfile_fieldを作成
   const newFileField = document.createElement('input');
   newFileField.setAttribute('type', 'file');
-  newFileField.setAttribute('name', 'product[images][]');
+  newFileField.setAttribute('name', 'product_form[images][]');
 
   // 最後のfile_fieldを取得
-  const lastFileField = document.querySelector('input[type="file"][name="product[images][]"]:last-child');
+  const lastFileField = document.querySelector('input[type="file"][name="product_form[images][]"]:last-child');
   // nextDataIndex = 最後のfile_fieldのdata-index + 1
   const nextDataIndex = Number(lastFileField.getAttribute('data-index')) +1;
   newFileField.setAttribute('data-index', nextDataIndex);
@@ -98,7 +98,7 @@ const changedFileField = (e) => {
 };
 
 // input要素を取得
-const fileField = document.querySelector('input[type="file"][name="product[images][]"]');
+const fileField = document.querySelector('input[type="file"][name="product_form[images][]"]');
 // input要素で値の変化が起きた際に呼び出される関数
 fileField.addEventListener('change', changedFileField);
 });

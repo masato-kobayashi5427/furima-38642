@@ -7,12 +7,13 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @product = Product.new
+    @product_form = ProductForm.new
   end
 
   def create
-    @product = Product.new(product_params)
-    if @product.save
+    @product_form = ProductForm.new(product_form_params)
+    if @product_form.valid?
+      @product_form.save
       redirect_to root_path
     else
       render :new
@@ -23,15 +24,21 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    if @product.purchase.present? || current_user.id != @product.user_id
+    product_attributes = @product.attributes
+    @product_form = ProductForm.new(product_attributes)
+    if @product.purchase.present? || current_user.id != @product_form.user_id
       redirect_to root_path
     else
     end
   end
 
   def update
-    if @product.update(product_params)
-      redirect_to "/products/#{@product.id}"
+    @product_form = ProductForm.new(product_form_params)
+
+    @product_form.images ||= @product.images
+    if @product_form.valid?
+      @product_form.update(product_form_params, @product)
+      redirect_to "/products/#{@product_form.id}"
     else
       render :edit
     end
@@ -44,8 +51,8 @@ class ProductsController < ApplicationController
 
   private
 
-  def product_params
-    params.require(:product).permit(:name, :explain, :price, :category_id, :prefecture_id, :state_id, :fee_id, :delivery_time_id, {images: []}).merge(user_id: current_user.id)
+  def product_form_params
+    params.require(:product_form).permit(:name, :explain, :price, :category_id, :prefecture_id, :state_id, :fee_id, :delivery_time_id, {images: []}).merge(user_id: current_user.id)
   end
 
   def set_product
