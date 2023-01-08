@@ -7,7 +7,7 @@ app/assets/stylesheets/items/new.css %>
   </header>
   <div class="items-sell-main">
     <h2 class="items-sell-title">商品の情報を入力</h2>
-    <%= form_with model: @product, local: true do |f| %>
+    <%= form_with model: @product_form, url: product_path(@product.id), method: :patch, local: true do |f| %>
 
     <%= render 'shared/error_messages', model: f.object %>
 
@@ -22,7 +22,7 @@ app/assets/stylesheets/items/new.css %>
         <p>
           クリックしてファイルをアップロード
         </p>
-        <%= f.file_field :image, name: 'product[images][]', data: {index: 0}, id:"item-image" %>
+        <%= f.file_field :image, name: 'product_form[images][]', data: {index: 0}, id:"item-image" %>
       </div>
     </div>
     <%# /商品画像 %>
@@ -52,6 +52,11 @@ app/assets/stylesheets/items/new.css %>
           <span class="indispensable">必須</span>
         </div>
         <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %>
+        <div class="weight-bold-text">
+          タグ
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.text_field :tag_name, placeholder: 'add tags', class:"select-box" %>
         <div class="weight-bold-text">
           商品の状態
           <span class="indispensable">必須</span>
@@ -140,7 +145,7 @@ app/assets/stylesheets/items/new.css %>
     <%# 下部ボタン %>
     <div class="sell-btn-contents">
       <%= f.submit "変更する" ,class:"sell-btn", id:"sell-btn"  %>
-      <%=link_to 'もどる', "/products/#{@product.id}", class:"back-btn" %>
+      <%=link_to 'もどる', "/products/#{@product_form.id}", class:"back-btn" %>
     </div>
     <%# /下部ボタン %>
   </div>
