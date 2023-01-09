@@ -11,4 +11,13 @@ class Product < ApplicationRecord
   has_many :product_tag_relations
   has_many :tags, through: :product_tag_relations
   has_one :purchase
+
+  def self.search(search)
+    if search != ""
+      Product.where('name LIKE(?)', "%#{search}%")
+    else
+      Product.all
+    end
+  end
+
 end
