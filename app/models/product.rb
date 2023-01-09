@@ -8,6 +8,7 @@ class Product < ApplicationRecord
   belongs_to :state
   belongs_to :fee
   belongs_to :delivery_time
+  has_many :comments
   has_many :product_tag_relations
   has_many :tags, through: :product_tag_relations
   has_one :purchase
