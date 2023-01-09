@@ -1,13 +1,34 @@
-<%# CSS・・・assets/stylesheets/shared/header.css %>
 <header class='top-page-header'>
   <div class='search-bar-contents'>
     <%= link_to image_tag("furima-logo-color.png", class:"furima-icon"), "/" %>
-    <form class="search-form" action="#">
-      <input class='input-box' placeholder='キーワードから探す'>
-      <button class="search-button">
-        <%= image_tag "search.png", class:"search-icon" %>
-      </button>
-    </form>
+    <%= search_form_for @q, url: searchkey_products_path, html: {class: "search-form"} do |f| %>
+      <div class="form">
+        <%= f.label :name, '商品名' %>
+        <br>
+        <%= f.text_field :name, placeholder: '商品名', class: "search-box" %>
+        <%= f.label :user_nickname_cont, '出品者名' %>
+        <br>
+        <%= f.text_field :user_nickname_cont, placeholder: '出品者名', class: "search-box" %>
+      </div>
+      <div class="category-form">
+        <%= f.label :category_id_in, 'カテゴリ' %>
+        <br>
+        <%= f.collection_check_boxes(:category_id_in, Category.all, :id, :name, {include_blank: "---"}) %>
+      </div>
+      <div class="form">
+        <%= f.label :price_gteq, '価格'%>
+        <br>
+        <%= f.number_field :price_gteq, class: "search-box" %>
+        <br>
+        円以上
+        <%= f.number_field :price_lteq, class: "search-box" %>
+        <br>
+        円以下
+      </div>
+      <div class="button-form">
+        <%= f.submit '検索' ,class: "search-button"%>
+      </div>
+    <% end %>
   </div>
   <div class='nav'>
     <ul class='lists-left'>
